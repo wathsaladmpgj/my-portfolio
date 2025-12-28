@@ -116,7 +116,7 @@ const Hero = () => {
                 className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-orange-500 shadow-2xl shadow-orange-500/50 float-animation"
               >
                 <img
-                  src="/myimage.jpg"
+                  src="/myimage.png"
                   alt="Profile"
                   className="w-full h-full object-cover"
                   onError={(e) => {

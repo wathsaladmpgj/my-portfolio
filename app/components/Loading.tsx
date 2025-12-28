@@ -115,7 +115,7 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
             >
               <div className="w-20 h-20 rounded-full overflow-hidden shadow-2xl shadow-orange-500/50 border-2 border-orange-500">
                 <img 
-                  src="/myimage.jpg" 
+                  src="/myimage.png" 
                   alt="Profile" 
                   className="w-full h-full object-cover"
                   onError={(e) => {

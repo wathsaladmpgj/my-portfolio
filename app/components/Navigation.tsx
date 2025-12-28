@@ -62,7 +62,7 @@ const Navigation = () => {
             {/* Mobile Logo - Left Side */}
             <div className="md:hidden absolute left-4">
               <img 
-                src="/myimage.jpg" 
+                src="/myimage.png" 
                 alt="Logo" 
                 className="h-10 w-10 object-contain rounded-full"
                 onError={(e) => {
