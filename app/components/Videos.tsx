@@ -49,7 +49,7 @@ const Videos = () => {
             Videos
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Tutorials, talks, and insights on cloud-native development
+            Learn computers, software, networking, and technology through easy tutorials.
           </p>
         </motion.div>
 

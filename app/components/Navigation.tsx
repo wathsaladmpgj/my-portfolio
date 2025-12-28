@@ -71,14 +71,9 @@ const Navigation = () => {
           <div className="flex items-center justify-center h-16 relative">
             {/* Mobile Logo - Left Side */}
             <div className="md:hidden absolute left-4">
-              <img 
-                src="/myimage.png" 
-                alt="Logo" 
-                className="h-10 w-10 object-contain rounded-full"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://via.placeholder.com/40/ff7300/ffffff?text=W';
-                }}
-              />
+              <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
+                JW
+              </span>
             </div>
 
             {/* Desktop */}

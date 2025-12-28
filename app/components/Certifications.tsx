@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaAward, FaTimes } from 'react-icons/fa';
+import { FaAward, FaTimes,FaArrowRight} from 'react-icons/fa';
 
 const Certifications = () => {
   const [selectedCert, setSelectedCert] = useState<number | null>(null);
@@ -136,6 +136,25 @@ const Certifications = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+      {/* More Videos Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center pt-12"
+        >
+          <a
+            href="https://www.youtube.com/@opencode"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-gray-700 rounded-full text-white hover:border-orange-500 hover:bg-orange-500 hover:bg-opacity-10 transition-all group"
+          >
+            <span className="font-medium">More Certificat on LinkdIn</span>
+            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

@@ -31,7 +31,7 @@ const Contact = () => {
             Get in <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
-            Ready to collaborate or just want to say hello? I'd love to hear from you.
+            Interested in collaborating or simply saying hello? I’d love to connect.
           </p>
 
           {/* Social Media Buttons */}
