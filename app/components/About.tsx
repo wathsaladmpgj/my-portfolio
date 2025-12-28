@@ -2,8 +2,19 @@
 
 import { motion } from 'framer-motion';
 import { FaGraduationCap, FaSchool, FaUniversity } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
 
 const About = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const education = [
     {
       icon: <FaGraduationCap />,
@@ -34,10 +45,10 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Bio Section */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: isMobile ? '0px' : '-100px' }}
+            transition={{ duration: isMobile ? 0.3 : 0.6 }}
             className="space-y-4"
           >
             <h3 className="text-2xl font-bold gradient-text mb-4">My Journey</h3>
@@ -60,10 +71,10 @@ const About = () => {
 
           {/* Profile Stats */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: isMobile ? '0px' : '-100px' }}
+            transition={{ duration: isMobile ? 0.3 : 0.6 }}
             className="grid grid-cols-2 gap-6"
           >
             {[
@@ -74,7 +85,7 @@ const About = () => {
             ].map((stat, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.05 }}
+                whileHover={isMobile ? {} : { scale: 1.05 }}
                 className="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-orange-500 transition-all"
               >
                 <h4 className="text-3xl font-bold gradient-text mb-2">{stat.value}</h4>

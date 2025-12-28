@@ -23,8 +23,19 @@ import {
   SiSpringboot,
   SiJenkins,
 } from 'react-icons/si';
+import { useState, useEffect } from 'react';
 
 const Skills = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const skills = [
     { name: 'Linux', icon: <FaLinux />, color: 'text-yellow-500' },
     { name: 'Docker', icon: <FaDocker />, color: 'text-blue-500' },
@@ -61,24 +72,26 @@ const Skills = () => {
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: isMobile ? 1 : 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05, y: -5 }}
+              viewport={{ once: true, margin: isMobile ? '0px' : '-50px' }}
+              transition={{ duration: isMobile ? 0.2 : 0.4, delay: isMobile ? 0 : index * 0.05 }}
+              whileHover={isMobile ? {} : { scale: 1.05, y: -5 }}
               className="skill-card bg-black p-6 rounded-lg border border-gray-800 hover:border-orange-500 transition-all group relative"
             >
               <div className="flex flex-col items-center gap-3">
-                <div className={`text-5xl ${skill.color} group-hover:scale-110 transition-transform`}>
+                <div className={`text-5xl ${skill.color} ${!isMobile && 'group-hover:scale-110'} transition-transform`}>
                   {skill.icon}
                 </div>
                 <h3 className="text-white font-semibold">{skill.name}</h3>
               </div>
               
-              {/* Tooltip */}
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-orange-500 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                {skill.name}
-              </div>
+              {/* Tooltip - Hidden on mobile */}
+              {!isMobile && (
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-orange-500 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                  {skill.name}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>

@@ -38,6 +38,54 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Mobile-specific performance optimizations */
+@media (max-width: 768px) {
+  /* Hardware acceleration for smoother scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Reduce motion complexity on mobile */
+  * {
+    will-change: auto !important;
+  }
+
+  /* Optimize transforms and animations */
+  .skill-card,
+  .project-card,
+  .stat-card {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Disable blur effects on mobile (very expensive) */
+  .blur-xl,
+  .blur-lg,
+  .blur-md {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Simplify gradients on mobile */
+  .gradient-text {
+    background-size: 100% 100% !important;
+  }
+
+  /* Disable hover effects on mobile */
+  *:hover {
+    transform: none !important;
+  }
+  
+  /* Optimize image rendering */
+  img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
 /* Optimize animations */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -130,6 +178,17 @@ body {
 
 .float-animation {
   animation: float 3s ease-in-out infinite;
+}
+
+/* Disable floating animation on mobile */
+@media (max-width: 768px) {
+  .float-animation {
+    animation: none !important;
+  }
+  
+  @keyframes pixelShift {
+    0%, 100% { transform: none; }
+  }
 }
 
 /* Custom Scrollbar */

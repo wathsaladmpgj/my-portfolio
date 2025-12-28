@@ -4,41 +4,62 @@ import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { FaDownload, FaEnvelope } from 'react-icons/fa';
 import PixelBlast from './PixelBlast';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect mobile devices
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Pixel Blast Background - Optimized */}
-      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
-        <PixelBlast
-          key="hero-pixelblast"
-          variant="circle"
-          pixelSize={8}
-          color="#FFA500"
-          patternScale={1.5}
-          patternDensity={0.7}
-          enableRipples={false}
-          transparent={true}
-          edgeFade={0.5}
-          autoPauseOffscreen={true}
-          speed={0.5}
-        />
-      </div>
+      {/* Pixel Blast Background - Disabled on mobile for performance */}
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
+          <PixelBlast
+            key="hero-pixelblast"
+            variant="circle"
+            pixelSize={8}
+            color="#FFA500"
+            patternScale={1.5}
+            patternDensity={0.7}
+            enableRipples={false}
+            transparent={true}
+            edgeFade={0.5}
+            autoPauseOffscreen={true}
+            speed={0.5}
+          />
+        </div>
+      )}
+      
+      {/* Static gradient background for mobile */}
+      {isMobile && (
+        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none bg-gradient-to-br from-orange-500/5 via-transparent to-orange-600/5"></div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: isMobile ? 0.3 : 0.8 }}
             className="text-center md:text-left"
           >
             <motion.h1
               className="text-5xl md:text-7xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: isMobile ? 0 : 0.2, duration: isMobile ? 0.3 : 0.6 }}
             >
               <span className="text-white">Hellow,</span>
               <br />
@@ -66,9 +87,10 @@ const Hero = () => {
                   2000,
                 ]}
                 wrapper="span"
-                speed={50}
+                speed={isMobile ? 70 : 50}
                 className="gradient-text font-semibold"
                 repeat={Infinity}
+                preRenderFirstString={true}
               />
             </div>
 
@@ -126,28 +148,32 @@ const Hero = () => {
                   }}
                 />
               </motion.div>
-              {/* Decorative Circles */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-orange-500/20 blur-xl"
-                animate={{
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                }}
-              />
-              <motion.div
-                className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-orange-400/20 blur-xl"
-                animate={{
-                  scale: [1, 1.3, 1],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  delay: 0.5,
-                }}
-              />
+              {/* Decorative Circles - Disabled on mobile */}
+              {!isMobile && (
+                <>
+                  <motion.div
+                    className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-orange-500/20 blur-xl"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                    }}
+                  />
+                  <motion.div
+                    className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-orange-400/20 blur-xl"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      delay: 0.5,
+                    }}
+                  />
+                </>
+              )}
             </div>
           </motion.div>
         </div>
