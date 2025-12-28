@@ -67,10 +67,10 @@ const About = () => {
             className="grid grid-cols-2 gap-6"
           >
             {[
-              { label: 'Projects Completed', value: '20+' },
+              { label: 'Projects Completed', value: '10+' },
               { label: 'YouTube Subscribers', value: '1K+' },
               { label: 'Certifications', value: '10+' },
-              { label: 'Years Experience', value: '3+' },
+              { label: 'Years Experience', value: '1+' },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -92,7 +92,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <h3 className="text-3xl font-bold text-center mb-12">
-            Education <span className="gradient-text">Timeline</span>
+            Education
           </h3>
           <div className="space-y-8">
             {education.map((item, index) => (

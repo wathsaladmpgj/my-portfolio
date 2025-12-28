@@ -1,31 +1,30 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaArrowRight } from 'react-icons/fa';
 
 const Projects = () => {
   const projects = [
     {
-      title: 'Cloud Monitoring Dashboard',
-      description: 'Real-time monitoring solution using Prometheus and Grafana for cloud infrastructure',
-      technologies: ['Prometheus', 'Grafana', 'Docker', 'AWS'],
-      github: 'https://github.com/yourusername/project1',
+      title: 'End-to-End DevOps Project on AWS',
+      description: 'DevOps project that I designed and implemented using AWS, Kubernetes, CI/CD automation, security scanning, and full-stack monitoring.',
+      technologies: ['Prometheus', 'Grafana', 'Docker', 'AWS', 'Kubernetes', 'CI/CD'],
+      github: 'https://github.com/wathsaladmpgj/CI-CD',
       demo: 'https://demo.com',
-      image: '/myimage.jpg',
+      image: '/project1.png',
     },
     {
-      title: 'Network Automation Tool',
-      description: 'Automated network configuration and management system using Python and GNS3',
-      technologies: ['Python', 'GNS3', 'Bash', 'Linux'],
-      github: 'https://github.com/yourusername/project2',
+      title: 'Local Mail Server Setup on Linux Mint',
+      description: 'built a fully functional local mail server on Linux Mint as a hands-on learning project to understand how email systems work internally.',
+      technologies: ['Postfix', 'Dovecot', 'Mailutils', 'Linux'],
       demo: 'https://demo.com',
-      image: 'https://via.placeholder.com/400x300/ff7300/ffffff?text=Network+Automation',
+      image: '/project2.png',
     },
     {
-      title: 'CI/CD Pipeline Platform',
-      description: 'Complete CI/CD solution with automated testing and deployment',
-      technologies: ['Docker', 'Git', 'Node.js', 'AWS'],
-      github: 'https://github.com/yourusername/project3',
+      title: 'Warehouse Management System',
+      description: 'A full-fledged Warehouse Management System built entirely using Java for the backend and JSP for the frontend.',
+      technologies: ['JAVA', 'JSP', 'CSS & JS', 'MySQL'],
+      github: 'https://github.com/wathsaladmpgj/warehouse_management_system',
       demo: 'https://demo.com',
       image: 'https://via.placeholder.com/400x300/ff7300/ffffff?text=CI/CD+Platform',
     },
@@ -33,9 +32,9 @@ const Projects = () => {
       title: 'Full-Stack Web Application',
       description: 'Modern web application with Next.js, Firebase, and real-time features',
       technologies: ['Next.js', 'Firebase', 'React', 'Node.js'],
-      github: 'https://github.com/yourusername/project4',
-      demo: 'https://demo.com',
-      image: 'https://via.placeholder.com/400x300/ff7300/ffffff?text=Web+Application',
+      github: 'https://github.com/OpenStag/openstage-website',
+      demo: 'https://openstag.vercel.app/',
+      image: '/project4.png',
     },
   ];
 
@@ -56,7 +55,7 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -117,6 +116,25 @@ const Projects = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* LinkedIn CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <a
+            href="https://www.youtube.com/@opencode"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-gray-700 rounded-full text-white hover:border-orange-500 hover:bg-orange-500 hover:bg-opacity-10 transition-all group"
+          >
+            <span className="font-medium">More Projects on LinkdIn</span>
+            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

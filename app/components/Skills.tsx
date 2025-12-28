@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { DiJenkins } from 'react-icons/di';
 import {
   FaLinux,
   FaDocker,
@@ -9,6 +10,8 @@ import {
   FaNode,
   FaReact,
   FaNetworkWired,
+  FaPython,
+  FaJenkins,
 } from 'react-icons/fa';
 import {
   SiPrometheus,
@@ -16,6 +19,9 @@ import {
   SiFirebase,
   SiNextdotjs,
   SiGnubash,
+  SiPython,
+  SiSpringboot,
+  SiJenkins,
 } from 'react-icons/si';
 
 const Skills = () => {
@@ -28,10 +34,10 @@ const Skills = () => {
     { name: 'Prometheus', icon: <SiPrometheus />, color: 'text-red-400' },
     { name: 'Grafana', icon: <SiGrafana />, color: 'text-orange-500' },
     { name: 'Firebase', icon: <SiFirebase />, color: 'text-yellow-400' },
-    { name: 'Node.js', icon: <FaNode />, color: 'text-green-600' },
     { name: 'Next.js', icon: <SiNextdotjs />, color: 'text-white' },
-    { name: 'React', icon: <FaReact />, color: 'text-cyan-400' },
-    { name: 'Bash', icon: <SiGnubash />, color: 'text-gray-400' },
+    { name: 'Jenkins', icon: <SiJenkins />, color: 'text-cyan-400' },
+    { name: 'Spring', icon: <SiSpringboot />, color: 'text-green-600' },
+    { name: 'Python', icon: <SiPython/>, color: 'text-gray-400' },
   ];
 
   return (
@@ -88,15 +94,15 @@ const Skills = () => {
           {[
             {
               title: 'Cloud & DevOps',
-              items: ['AWS', 'Docker', 'CI/CD', 'Prometheus', 'Grafana'],
+              items: ['AWS', 'Docker', 'CI/CD', 'Prometheus', 'Grafana','Git & GitHub'],
             },
             {
-              title: 'Web Development',
-              items: ['Next.js', 'React', 'Node.js', 'Firebase', 'API Integration'],
+              title: 'Web/Application Development',
+              items: ['Next.js', 'React', 'Node.js', 'Firebase','Spring', 'API Integration'],
             },
             {
               title: 'Networking',
-              items: ['GNS3', 'Linux', 'Network Security', 'Cloud Networking'],
+              items: ['GNS3', 'Linux', 'Network Security', 'Cloud Networking','Cisco Packet Tracer','Network Devices'],
             },
           ].map((category, index) => (
             <motion.div
@@ -105,10 +111,10 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-black p-6 rounded-lg border border-gray-800"
+              className="bg-black p-6 rounded-lg border border-gray-800 "
             >
               <h3 className="text-xl font-bold gradient-text mb-4">{category.title}</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 grid md:grid-cols-2 gap-2">
                 {category.items.map((item) => (
                   <li key={item} className="text-gray-300 flex items-center gap-2">
                     <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
