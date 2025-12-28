@@ -16,6 +16,7 @@ import {
   FaSun,
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
+import { smoothScrollTo } from '../utils/smoothScroll';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,23 +34,32 @@ const Navigation = () => {
   ];
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 120;
 
-      menuItems.forEach(item => {
-        const section = document.getElementById(item.href.substring(1));
-        if (section) {
-          if (
-            scrollPosition >= section.offsetTop &&
-            scrollPosition < section.offsetTop + section.offsetHeight
-          ) {
-            setActiveSection(item.href.substring(1));
-          }
-        }
-      });
+          menuItems.forEach(item => {
+            const section = document.getElementById(item.href.substring(1));
+            if (section) {
+              if (
+                scrollPosition >= section.offsetTop &&
+                scrollPosition < section.offsetTop + section.offsetHeight
+              ) {
+                setActiveSection(item.href.substring(1));
+              }
+            }
+          });
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -79,6 +89,10 @@ const Navigation = () => {
                   <a
                     key={item.name}
                     href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      smoothScrollTo(item.href);
+                    }}
                     className={`px-4 py-2 rounded-full text-sm transition ${
                       isActive
                         ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white'
@@ -139,7 +153,11 @@ const Navigation = () => {
                   <li key={item.name}>
                     <a
                       href={item.href}
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        smoothScrollTo(item.href);
+                        setIsOpen(false);
+                      }}
                       className={`flex items-center gap-3 text-lg px-4 py-3 rounded-lg transition-all ${
                         isActive
                           ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white'

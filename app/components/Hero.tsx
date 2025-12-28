@@ -8,18 +8,20 @@ import PixelBlast from './PixelBlast';
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Pixel Blast Background */}
+      {/* Pixel Blast Background - Optimized */}
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
         <PixelBlast
           key="hero-pixelblast"
           variant="circle"
-          pixelSize={6}
+          pixelSize={8}
           color="#FFA500"
-          patternScale={2}
-          patternDensity={1}
-          enableRipples={true}
+          patternScale={1.5}
+          patternDensity={0.7}
+          enableRipples={false}
           transparent={true}
           edgeFade={0.5}
+          autoPauseOffscreen={true}
+          speed={0.5}
         />
       </div>
 
