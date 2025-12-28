@@ -9,6 +9,7 @@ interface LoadingProps {
 
 const Loading = ({ onLoadingComplete }: LoadingProps) => {
   const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const [particles, setParticles] = useState<Array<{
     id: number;
     initialX: number;
@@ -20,8 +21,13 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
   }>>([]);
 
   useEffect(() => {
-    // Generate particles only on client side
-    const particleData = [...Array(50)].map((_, i) => ({
+    // Detect if mobile
+    const checkMobile = () => window.innerWidth < 768;
+    setIsMobile(checkMobile());
+
+    // Generate fewer particles on mobile for better performance
+    const particleCount = checkMobile() ? 15 : 50;
+    const particleData = [...Array(particleCount)].map((_, i) => ({
       id: i,
       initialX: Math.random() * window.innerWidth,
       initialY: Math.random() * window.innerHeight,
@@ -42,35 +48,44 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
   }, []);
 
   useEffect(() => {
+    // Faster loading on mobile for better UX
+    const loadingSpeed = isMobile ? 40 : 30;
+    const incrementAmount = isMobile ? 3 : 2;
+    
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
           setTimeout(() => {
             onLoadingComplete?.();
-          }, 500);
+          }, 300); // Shorter delay on mobile
           return 100;
         }
-        return prev + 2;
+        return prev + incrementAmount;
       });
-    }, 30);
+    }, loadingSpeed);
 
     return () => clearInterval(timer);
-  }, [onLoadingComplete]);
+  }, [onLoadingComplete, isMobile]);
 
   return (
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[100] bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center overflow-hidden"
+      style={{
+        // Prevent scrolling on mobile
+        touchAction: 'none',
+        WebkitOverflowScrolling: 'touch'
+      }}
     >
-      {/* Animated Particles Background */}
-      <div className="absolute inset-0">
+      {/* Animated Particles Background - Optimized for mobile */}
+      <div className="absolute inset-0" style={{ willChange: 'auto' }}>
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute w-1 h-1 bg-orange-500 rounded-full"
+            className={`absolute ${isMobile ? 'w-1 h-1' : 'w-1 h-1'} bg-orange-500 rounded-full`}
             initial={{
               x: particle.initialX,
               y: particle.initialY,
@@ -86,44 +101,56 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
               repeat: Infinity,
               ease: 'linear',
             }}
+            style={{ willChange: 'transform' }}
           />
         ))}
       </div>
 
-      <div className="text-center relative z-10">
-        {/* Animated Logo */}
+      <div className="text-center relative z-10 px-4">
+        {/* Animated Logo - Optimized for mobile */}
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
+          transition={{ duration: 0.4 }}
+          className="mb-6 md:mb-8"
         >
           <div className="relative">
             {/* Outer Ring */}
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-              className="w-32 h-32 mx-auto border-4 border-orange-500/30 border-t-orange-500 rounded-full"
+              transition={{ 
+                duration: isMobile ? 2.5 : 2, 
+                repeat: Infinity, 
+                ease: 'linear' 
+              }}
+              className="w-24 h-24 md:w-32 md:h-32 mx-auto border-4 border-orange-500/30 border-t-orange-500 rounded-full"
+              style={{ willChange: 'transform' }}
             />
             
             {/* Inner Circle */}
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: [0.8, 1.2, 0.8] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                ease: 'easeInOut' 
+              }}
               className="absolute inset-0 flex items-center justify-center"
+              style={{ willChange: 'transform' }}
             >
-              <div className="w-20 h-20 rounded-full overflow-hidden shadow-2xl shadow-orange-500/50 border-2 border-orange-500">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shadow-2xl shadow-orange-500/50 border-2 border-orange-500">
                 <img 
                   src="/myimage.png" 
                   alt="Profile" 
                   className="w-full h-full object-cover"
+                  loading="eager"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                     const parent = e.currentTarget.parentElement;
                     if (parent) {
-                      parent.className = 'w-20 h-20 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full flex items-center justify-center shadow-2xl shadow-orange-500/50';
-                      parent.innerHTML = '<span class="text-3xl font-bold text-white">W</span>';
+                      parent.className = 'w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full flex items-center justify-center shadow-2xl shadow-orange-500/50';
+                      parent.innerHTML = '<span class="text-2xl md:text-3xl font-bold text-white">W</span>';
                     }
                   }}
                 />
@@ -136,25 +163,26 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2 }}
         >
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">
             <span className="gradient-text">Loading</span>
           </h2>
           
           {/* Progress Bar */}
-          <div className="w-64 mx-auto bg-gray-800 rounded-full h-2 overflow-hidden">
+          <div className="w-48 md:w-64 mx-auto bg-gray-800 rounded-full h-1.5 md:h-2 overflow-hidden shadow-lg">
             <motion.div
-              className="h-full bg-gradient-to-r from-orange-500 to-pink-500"
+              className="h-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500"
               initial={{ width: '0%' }}
               animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
+              style={{ willChange: 'width' }}
             />
           </div>
           
           {/* Percentage */}
           <motion.p
-            className="text-gray-400 mt-4 text-xl font-semibold"
+            className="text-gray-400 mt-3 md:mt-4 text-lg md:text-xl font-semibold tabular-nums"
             key={progress}
           >
             {progress}%
@@ -165,8 +193,8 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="flex gap-2 justify-center mt-6"
+          transition={{ delay: 0.3 }}
+          className="flex gap-2 justify-center mt-4 md:mt-6"
         >
           {[0, 1, 2].map((i) => (
             <motion.div
@@ -180,7 +208,8 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
                 repeat: Infinity,
                 delay: i * 0.2,
               }}
-              className="w-3 h-3 bg-orange-500 rounded-full"
+              className="w-2 h-2 md:w-3 md:h-3 bg-orange-500 rounded-full"
+              style={{ willChange: 'transform, opacity' }}
             />
           ))}
         </motion.div>
@@ -190,9 +219,9 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-          className="text-gray-500 mt-8 text-sm"
+          className="text-gray-500 mt-6 md:mt-8 text-xs md:text-sm"
         >
-          Preparing your experience...
+          {isMobile ? 'Loading your experience...' : 'Preparing your experience...'}
         </motion.p>
       </div>
     </motion.div>

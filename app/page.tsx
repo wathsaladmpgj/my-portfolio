@@ -19,14 +19,35 @@ const Footer = lazy(() => import('./components/Footer'));
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Reduce loading time for better user experience
+    // Detect mobile device
+    const checkMobile = () => window.innerWidth < 768;
+    setIsMobile(checkMobile());
+
+    // Prevent body scroll during loading
+    if (typeof document !== 'undefined') {
+      document.body.classList.add('loading');
+    }
+
+    // Faster loading on mobile devices
+    const loadingTime = checkMobile() ? 1200 : 1500;
+    
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+      // Re-enable body scroll
+      if (typeof document !== 'undefined') {
+        document.body.classList.remove('loading');
+      }
+    }, loadingTime);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (typeof document !== 'undefined') {
+        document.body.classList.remove('loading');
+      }
+    };
   }, []);
 
   return (

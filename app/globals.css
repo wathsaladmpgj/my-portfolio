@@ -309,3 +309,51 @@ section {
     padding: 60px 20px;
   }
 }
+
+/* Loading Page Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Prevent body scroll during loading */
+  body.loading {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+  }
+
+  /* Optimize loading animations for mobile */
+  .loading-animation {
+    animation-duration: 2.5s !important;
+  }
+
+  /* Reduce particle complexity on mobile */
+  .loading-particle {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+
+  /* Optimize gradient rendering */
+  .gradient-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Smooth fade transitions */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
