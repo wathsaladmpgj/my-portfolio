@@ -20,7 +20,7 @@ const Certifications = () => {
       issuer: 'Cisco',
       date: '2023',
       description: 'Proficiency in containerization and Docker ecosystem',
-      badge: 'https://via.placeholder.com/200/ff7300/ffffff?text=Docker',
+      badge: '/cisco1.png',
     },
     {
       title: 'Networking Devices and Initial Configuration',

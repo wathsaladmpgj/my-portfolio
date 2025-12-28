@@ -1,17 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaYoutube, FaInstagram, FaMedium } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaYoutube, FaInstagram, FaMedium, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
 const Contact = () => {
   const socialLinks = [
-    { icon: <FaLinkedin />, url: 'https://linkedin.com/in/yourusername', label: 'LinkedIn' },
-    { icon: <FaGithub />, url: 'https://github.com/yourusername', label: 'GitHub' },
-    { icon: <FaYoutube />, url: 'https://youtube.com/@opencode', label: 'YouTube' },
-    { icon: <FaXTwitter />, url: 'https://twitter.com/yourusername', label: 'X/Twitter' },
+    { icon: <FaLinkedin />, url: 'www.linkedin.com/in/janith-wathsala', label: 'LinkedIn' },
+    { icon: <FaGithub />, url: 'https://github.com/wathsaladmpgj', label: 'GitHub' },
+    { icon: <FaYoutube />, url: 'https://www.youtube.com/@bluezhe-c5n', label: 'YouTube' },
+    { icon: <FaWhatsapp />, url: 'https://wa.me/qr/WFRWF6JAD3SMM1', label: 'Whatsapp' },
     { icon: <FaMedium />, url: 'https://medium.com/@yourusername', label: 'Medium' },
-    { icon: <FaInstagram />, url: 'https://instagram.com/yourusername', label: 'Instagram' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/janith_wathsala88?igsh=cngxcjgzbWtpOTMx', label: 'Instagram' },
   ];
 
   return (

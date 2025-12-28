@@ -26,7 +26,7 @@ const Projects = () => {
       technologies: ['JAVA', 'JSP', 'CSS & JS', 'MySQL'],
       github: 'https://github.com/wathsaladmpgj/warehouse_management_system',
       demo: 'https://demo.com',
-      image: 'https://via.placeholder.com/400x300/ff7300/ffffff?text=CI/CD+Platform',
+      image: '/project3.png',
     },
     {
       title: 'Full-Stack Web Application',
@@ -62,55 +62,52 @@ const Projects = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.6, delay: index * 0.1 }}
-              className="project-card h-96"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl overflow-hidden hover:border-orange-500 transition-all duration-300 group"
             >
-              <div className="project-card-inner">
-                {/* Front */}
-                <div className="project-card-front  border border-gray-800 p-6 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover rounded-lg mb-4"
-                  />
-                  <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-orange-500/20 text-orange-500 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-orange-500 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-gray-400 mb-4 text-sm md:text-base leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 bg-orange-500/20 text-orange-500 rounded-full text-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-
-                {/* Back */}
-                <div className="project-card-back bg-gradient-to-br from-orange-600 to-orange-800 p-6 flex flex-col justify-center items-center text-center">
-                  <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
-                  <p className="text-white mb-6">{project.description}</p>
-                  <div className="flex gap-4">
+                <div className="flex gap-3 flex-wrap">
+                  {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-white text-orange-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all"
+                      className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-orange-600 transition-all"
                     >
                       <FaGithub />
                       GitHub
                     </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-900 transition-all"
-                    >
-                      <FaExternalLinkAlt />
-                      Demo
-                    </a>
-                  </div>
+                  )}
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-700 transition-all"
+                  >
+                    <FaExternalLinkAlt />
+                    Demo
+                  </a>
                 </div>
               </div>
             </motion.div>

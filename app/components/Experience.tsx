@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaUsers, FaLightbulb, FaRocket, FaGithub } from 'react-icons/fa';
+import { FaUsers, FaLightbulb, FaRocket, FaGithub, FaLaptopCode } from 'react-icons/fa';
 
 const Experience = () => {
   return (
@@ -29,11 +29,11 @@ const Experience = () => {
           transition={{ duration: 0.6 }}
           className="mb-12 pixel-blast-bg p-8 rounded-lg border border-gray-800"
         >
-          <div className="flex items-start gap-6 mb-6">
-            <div className="text-5xl text-orange-500">
+          <div className="flex flex-col md:flex-row items-start gap-6 mb-6">
+            <div className="text-5xl text-orange-500 mx-auto md:mx-0">
               <FaUsers />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 text-center md:text-left">
               <h3 className="text-2xl font-bold text-white mb-2">
                 IEEE Computer Society Student Branch Chapter of NSBM
               </h3>
@@ -67,6 +67,67 @@ const Experience = () => {
           </div>
         </motion.div>
 
+        {/* Freelance Experience */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 pixel-blast-bg p-8 rounded-lg border border-gray-800"
+        >
+          <div className="flex flex-col md:flex-row items-start gap-6 mb-6">
+            <div className="text-5xl text-orange-500 mx-auto md:mx-0">
+              <FaLaptopCode />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h3 className="text-2xl font-bold text-white mb-2">
+                Freelance Web Developer
+              </h3>
+              <p className="text-orange-500 font-semibold mb-4">Full-Stack Developer | 2024 - Present</p>
+              <p className="text-gray-300 mb-4">
+                Delivering end-to-end web development solutions for diverse clients, specializing in modern 
+                full-stack applications with seamless payment integration and robust backend systems.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-6">
+            <div className="bg-gray-900 p-4 rounded-lg border border-gray-800">
+              <h4 className="text-orange-500 font-semibold mb-2">E-Commerce Solutions</h4>
+              <p className="text-gray-300 text-sm">
+                Built complete e-commerce platforms for clothing shops and spice stores with Payhere payment gateway integration
+              </p>
+            </div>
+            <div className="bg-gray-900 p-4 rounded-lg border border-gray-800">
+              <h4 className="text-orange-500 font-semibold mb-2">Custom Backend Systems</h4>
+              <p className="text-gray-300 text-sm">
+                Developed surfing site backend with comprehensive admin panel for content management
+              </p>
+            </div>
+            <div className="bg-gray-900 p-4 rounded-lg border border-gray-800">
+              <h4 className="text-orange-500 font-semibold mb-2">Multiple Projects</h4>
+              <p className="text-gray-300 text-sm">
+                Successfully delivered 10+ websites with modern tech stacks and responsive designs
+              </p>
+            </div>
+          </div>
+
+          {/* Tech Stack */}
+          <div className="bg-gray-900 p-4 rounded-lg border border-gray-800">
+            <h4 className="text-white font-semibold mb-3">Tech Stack</h4>
+            <div className="flex flex-wrap gap-2">
+              {['Next.js', 'JavaScript', 'Tailwind CSS', 'Firebase', 'Supabase', 'Payhere Payment Gateway'].map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1 bg-orange-500/20 text-orange-500 rounded-full text-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
         {/* OpenStage Experience */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,11 +136,11 @@ const Experience = () => {
           transition={{ duration: 0.6 }}
           className="bg-black pixel-blast-bg p-8 rounded-lg border border-gray-800"
         >
-          <div className="flex items-start gap-6 mb-6">
-            <div className="text-5xl gradient-text">
+          <div className="flex flex-col md:flex-row items-start gap-6 mb-6">
+            <div className="text-5xl gradient-text mx-auto md:mx-0">
               <FaRocket />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 text-center md:text-left">
               <h3 className="text-2xl font-bold text-white mb-2">
                 OpenStage - Co-Founder
               </h3>
